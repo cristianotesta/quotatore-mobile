@@ -1,0 +1,83 @@
+                            <!DOCTYPE html>
+                            <html lang="it">
+                            <head>
+                              <meta charset="UTF-8">
+                              <title>Task Card - Gestione Documenti di Lavoro</title>
+                              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+                              <link rel="stylesheet" href="/style.css">
+                            </head>
+                            <body>
+                              <!-- Logo in alto a destra -->
+                              <img src="/Atitech_logo.png" alt="Atitech logo" class="logo">
+
+                              <div class="container">
+                                <h1>Task Card</h1>
+                                <form action="/task-card" method="POST" id="taskCardForm">
+                                  <div class="form-group">
+                                    <label for="airplane">Seleziona Database Aereo:</label>
+                                    <select class="form-control" id="airplane" name="airplane" required>
+                                      <% airplanes.forEach(function(plane) { %>
+                                        <option value="<%= plane %>"><%= plane %></option>
+                                      <% }); %>
+                                    </select>
+                                  </div>
+
+                                  <div id="taskCardsContainer">
+                                    <!-- I campi per le Task Card verranno aggiunti qui -->
+                                    <div class="form-group task-card-input">
+                                      <label>Task Card ID:</label>
+                                      <div class="input-group">
+                                        <input type="text" name="taskCard" class="form-control" placeholder="Inserisci Task Card ID" required>
+                                        <div class="input-group-append">
+                                          <button class="btn btn-danger remove-task-card" type="button">Rimuovi</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <button type="button" id="addTaskCard" class="btn btn-info mb-3">Aggiungi Task Card</button>
+                                  <br>
+                                  <button type="submit" class="btn btn-success">Cerca Task Card</button>
+                                </form>
+                              </div>
+
+                              <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                  const maxTaskCards = 10;
+                                  const container = document.getElementById('taskCardsContainer');
+                                  const addButton = document.getElementById('addTaskCard');
+
+                                  addButton.addEventListener('click', function() {
+                                    const currentInputs = container.getElementsByClassName('task-card-input');
+                                    if (currentInputs.length < maxTaskCards) {
+                                      const div = document.createElement('div');
+                                      div.classList.add('form-group', 'task-card-input');
+                                      div.innerHTML = `
+                                        <label>Task Card ID:</label>
+                                        <div class="input-group">
+                                          <input type="text" name="taskCard" class="form-control" placeholder="Inserisci Task Card ID" required>
+                                          <div class="input-group-append">
+                                            <button class="btn btn-danger remove-task-card" type="button">Rimuovi</button>
+                                          </div>
+                                        </div>
+                                      `;
+                                      container.appendChild(div);
+                                    } else {
+                                      alert("Puoi aggiungere fino a 10 task card.");
+                                    }
+                                  });
+
+                                  container.addEventListener('click', function(e) {
+                                    if (e.target && e.target.matches('button.remove-task-card')) {
+                                      const currentInputs = container.getElementsByClassName('task-card-input');
+                                      if (currentInputs.length > 1) {
+                                        e.target.closest('.task-card-input').remove();
+                                      } else {
+                                        alert("Deve essere presente almeno una task card.");
+                                      }
+                                    }
+                                  });
+                                });
+                              </script>
+                            </body>
+                            </html>

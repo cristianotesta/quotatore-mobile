@@ -1,0 +1,86 @@
+/* Font e corpo pagina */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* Logo in alto a destra */
+.logo {
+    position: absolute;
+    top: 20px;
+    right: 100px;
+    width: 120px;
+    z-index: 999; /* per essere sicuri sia sopra la pagina */
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    margin-top: 80px; /* spostato un po' più in basso per far spazio al logo */
+}
+
+h1 {
+    font-size: 2rem;
+    color: #00ffd5;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Stile per le form e i pulsanti */
+.form-group label {
+    font-weight: bold;
+}
+
+.btn {
+    border-radius: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Tabelle */
+.table {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+}
+
+.table th, .table td {
+    border: none;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.thead-dark th {
+    background-color: #333 !important;
+}
+
+/* Campi di input */
+.input-group .form-control {
+    border-radius: 20px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: #fff;
+}
+
+.input-group .form-control::placeholder {
+    color: #ddd;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    background: rgba(255,255,255,0.1);
+}

@@ -1,0 +1,60 @@
+                    <!DOCTYPE html>
+                    <html lang="it">
+                    <head>
+                      <meta charset="UTF-8">
+                      <title>QUOTAZIONE - Risultati Task Card</title>
+                      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+                      <link rel="stylesheet" href="/style.css">
+                    </head>
+                    <body>
+                      <!-- Logo in alto a destra -->
+                      <img src="/Atitech_logo.png" alt="Atitech logo" class="logo">
+
+                      <div class="container">
+                        <h1>QUOTAZIONE</h1>
+                        <p><strong>Aereo selezionato:</strong> <%= selectedAirplane %></p>
+                        <table class="table table-bordered" id="resultsTable">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th>Task Card ID</th>
+                              <th>Description</th>
+                              <th>Hour</th>
+                              <th>Work Area</th>
+                              <th>Special</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% results.forEach(function(item) { %>
+                              <tr>
+                                <td><%= item.TaskNo %></td>
+                                <td><%= item.description %></td>
+                                <td><%= item.hour %></td>
+                                <td><%= item.workArea %></td>
+                                <td><%= item.Special %></td>
+                              </tr>
+                            <% }); %>
+                          </tbody>
+                        </table>
+                        <p><strong>Totale Hour:</strong> <%= totalHours %></p>
+
+                        <button class="btn btn-primary" onclick="copyToClipboard()">Copia in Clipboard</button>
+                        <a href="/reset" class="btn btn-secondary">Nuova Interrogazione</a>
+                      </div>
+
+                      <script>
+                        function copyToClipboard() {
+                          var range = document.createRange();
+                          range.selectNode(document.getElementById("resultsTable"));
+                          window.getSelection().removeAllRanges(); 
+                          window.getSelection().addRange(range);
+                          try {
+                            var successful = document.execCommand('copy');
+                            alert('Tabella copiata in clipboard.');
+                          } catch(err) {
+                            alert('Errore durante la copia.');
+                          }
+                          window.getSelection().removeAllRanges();
+                        }
+                      </script>
+                    </body>
+                    </html>
